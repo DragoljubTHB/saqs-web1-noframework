@@ -32,8 +32,11 @@ var userController = {
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/basestations', function (greeting) {
-                console.log(JSON.parse(greeting.body).content);
+            stompClient.subscribe('/basestations', function (message) {
+                console.log(message);
+                console.log(message.body);
+                console.log(message.body.content);
+                console.log(JSON.parse(message.body).content);
             });
         });
     },
