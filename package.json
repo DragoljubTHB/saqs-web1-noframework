@@ -1,10 +1,10 @@
 {
-  "name": "koma-web-static",
+  "name": "eis-für-alle",
   "version": "1.0.0",
-  "description": "Competency assessment",
+  "description": "saqs-term-pro",
   "main": "main.js",
   "local-web-server": {
-    "port": 8000
+    "port": 8002
   },
   "scripts": {
     "start": "ws",
@@ -13,7 +13,7 @@
     "webify_bucket": "aws  --region us-west-2 s3 website --index-document index.html --error-document error.html 's3://koma.thb.de'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "dado",
+  "author": "saqs",
   "license": "ISC",
   "devDependencies": {
     "bootstrap": "^3.3.7",
