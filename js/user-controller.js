@@ -21,7 +21,14 @@ var userController = {
         let that = this;
     },
     connect() {
-        let socket = new SockJS(configConstants.eisSocketServer.endpointName);
+        const url = configConstants.eisSocketServer.protocolType +
+                    configConstants.eisSocketServer.host +
+                    ':' +
+                    configConstants.eisSocketServer.port +
+                    '/' +
+                    configConstants.eisSocketServer.endpointName;
+
+        let socket = new SockJS(url);
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             setConnected(true);

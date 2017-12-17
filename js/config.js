@@ -1,7 +1,8 @@
 var configConstants = {
 	eisSocketServer: {
-		url: 'localhost',
-		port: '8282',
+		protocolType: 'http://',
+		host: 'localhost',
+		port: '8080',
 		endpointName: 'ws-eis-endpoint',
 		inputEndpointName: '/eis/stations'
 	},
