@@ -31,7 +31,6 @@ var userController = {
         let socket = new SockJS(url);
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
-            setConnected(true);
             console.log('Connected: ' + frame);
             stompClient.subscribe('/basestations', function (greeting) {
                 console.log(JSON.parse(greeting.body).content);
@@ -42,7 +41,6 @@ var userController = {
         if (stompClient !== null) {
             stompClient.disconnect();
         }
-        setConnected(false);
         console.log("Disconnected");
     },
     sendInput() {
