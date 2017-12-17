@@ -1,21 +1,49 @@
 var userController = {
     data: {
-        auth0Lock: null,
+        stompClient: null,
         config: null
     },
     uiElements: {
-        addRowButton02: null
+        containerDiv: null
     },
     init: function (config) {
-        var that = this;
+        let that = this;
 
-        this.uiElements.loginButton = $('#auth0-login');
+        this.uiElements.containerDiv = $('#container');
 
         this.data.config = config;
 
         this.wireEvents();
+
+        this.connect();
     },
     wireEvents: function () {
-        var that = this;
+        let that = this;
+    },
+    connect() {
+        let socket = new SockJS(configConstants.eisSocketServer.endpointName);
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            setConnected(true);
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/basestations', function (greeting) {
+                console.log(JSON.parse(greeting.body).content);
+            });
+        });
+    },
+    disconnect() {
+        if (stompClient !== null) {
+            stompClient.disconnect();
+        }
+        setConnected(false);
+        console.log("Disconnected");
+    },
+    sendInput() {
+        stompClient.send(configConstants.eisSocketServer.inputEndpointName,
+                        {},
+                        JSON.stringify({'name': $("#name").val()}));
+    },
+    showResponse(message) {
+        console.log(message);
     }
 };
